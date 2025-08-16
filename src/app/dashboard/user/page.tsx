@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/common/DashboardLayout';
-import { UserDashboard } from '@/components/user/UserDashboard';
+import { EnhancedUserDashboard } from '@/components/user/EnhancedUserDashboard';
 
 export default function UserDashboardPage() {
   return (
     <DashboardLayout allowedRoles={['user']}>
-      <UserDashboard />
+      <EnhancedUserDashboard />
     </DashboardLayout>
   );
 }

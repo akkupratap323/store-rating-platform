@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/common/DashboardLayout';
-import { StoreBrowsing } from '@/components/user/StoreBrowsing';
+import { EnhancedStoreBrowsing } from '@/components/user/EnhancedStoreBrowsing';
 
 export default function UserStoresPage() {
   return (
     <DashboardLayout allowedRoles={['user']}>
-      <StoreBrowsing />
+      <EnhancedStoreBrowsing />
     </DashboardLayout>
   );
 }

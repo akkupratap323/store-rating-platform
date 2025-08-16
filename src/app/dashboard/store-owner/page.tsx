@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/common/DashboardLayout';
-import { StoreOwnerDashboard } from '@/components/store-owner/StoreOwnerDashboard';
+import { EnhancedStoreOwnerDashboard } from '@/components/store-owner/EnhancedStoreOwnerDashboard';
 
 export default function StoreOwnerDashboardPage() {
   return (
     <DashboardLayout allowedRoles={['store_owner']}>
-      <StoreOwnerDashboard />
+      <EnhancedStoreOwnerDashboard />
     </DashboardLayout>
   );
 }

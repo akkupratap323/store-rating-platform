@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
           id SERIAL PRIMARY KEY,
-          name VARCHAR(60) NOT NULL CHECK (LENGTH(name) >= 20 AND LENGTH(name) <= 60),
+          name VARCHAR(60) NOT NULL CHECK (LENGTH(name) >= 3 AND LENGTH(name) <= 60),
           email VARCHAR(255) UNIQUE NOT NULL,
           password VARCHAR(255) NOT NULL,
           address TEXT NOT NULL CHECK (LENGTH(address) <= 400),
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS stores (
           id SERIAL PRIMARY KEY,
-          name VARCHAR(60) NOT NULL CHECK (LENGTH(name) >= 20 AND LENGTH(name) <= 60),
+          name VARCHAR(60) NOT NULL CHECK (LENGTH(name) >= 3 AND LENGTH(name) <= 60),
           email VARCHAR(255) UNIQUE NOT NULL,
           address TEXT NOT NULL CHECK (LENGTH(address) <= 400),
           owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -44,6 +44,14 @@ export async function POST(request: NextRequest) {
           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           UNIQUE(user_id, store_id)
       );
+    `);
+
+    // Update name constraint to allow shorter names
+    await pool.query(`
+      ALTER TABLE users DROP CONSTRAINT IF EXISTS users_name_check;
+      ALTER TABLE users ADD CONSTRAINT users_name_check CHECK (LENGTH(name) >= 3 AND LENGTH(name) <= 60);
+      ALTER TABLE stores DROP CONSTRAINT IF EXISTS stores_name_check;
+      ALTER TABLE stores ADD CONSTRAINT stores_name_check CHECK (LENGTH(name) >= 3 AND LENGTH(name) <= 60);
     `);
 
     // Create indexes
@@ -149,6 +157,59 @@ export async function POST(request: NextRequest) {
       ('Local Hardware and Tools Store', 'hardware@local.com', '654 Tools Street, Industrial Area, IA 86420')
       ON CONFLICT (email) DO NOTHING;
     `);
+
+    // Create sample ratings for testing Store Owner features
+    const normalUserResult = await pool.query('SELECT id FROM users WHERE email = $1', ['user@demo.com']);
+    const normalUserId = normalUserResult.rows[0]?.id;
+
+    const storesResult = await pool.query('SELECT id FROM stores WHERE owner_id = $1', [storeOwnerId]);
+    const storeIds = storesResult.rows.map(row => row.id);
+
+    if (normalUserId && storeIds.length > 0) {
+      // Create ratings from the normal user to the store owner's stores
+      for (const storeId of storeIds) {
+        const rating = Math.floor(Math.random() * 3) + 3; // Random rating between 3-5
+        await pool.query(`
+          INSERT INTO ratings (user_id, store_id, rating) 
+          VALUES ($1, $2, $3) 
+          ON CONFLICT (user_id, store_id) DO NOTHING;
+        `, [normalUserId, storeId, rating]);
+      }
+    }
+
+    // Add more sample users to create more ratings
+    const sampleUsersData = [
+      { name: 'Alice Johnson Smith Customer', email: 'alice@customer.com', password: await hashPassword('Alice123!'), address: '100 Alice Street, Customer City, CC 11111' },
+      { name: 'Bob Williams Davis Customer', email: 'bob@customer.com', password: await hashPassword('Bob123!'), address: '200 Bob Avenue, Customer Town, CT 22222' },
+      { name: 'Charlie Brown Miller Customer', email: 'charlie@customer.com', password: await hashPassword('Charlie123!'), address: '300 Charlie Road, Customer Village, CV 33333' }
+    ];
+
+    for (const userData of sampleUsersData) {
+      await pool.query(`
+        INSERT INTO users (name, email, password, address, role) 
+        VALUES ($1, $2, $3, $4, 'user') 
+        ON CONFLICT (email) DO NOTHING;
+      `, [userData.name, userData.email, userData.password, userData.address]);
+
+      // Get the user ID and create ratings
+      const userResult = await pool.query('SELECT id FROM users WHERE email = $1', [userData.email]);
+      const userId = userResult.rows[0]?.id;
+
+      if (userId && storeIds.length > 0) {
+        // Each user rates 1-2 stores randomly
+        const numRatings = Math.floor(Math.random() * 2) + 1;
+        const shuffledStores = [...storeIds].sort(() => Math.random() - 0.5);
+        
+        for (let i = 0; i < numRatings && i < shuffledStores.length; i++) {
+          const rating = Math.floor(Math.random() * 5) + 1; // Random rating 1-5
+          await pool.query(`
+            INSERT INTO ratings (user_id, store_id, rating) 
+            VALUES ($1, $2, $3) 
+            ON CONFLICT (user_id, store_id) DO NOTHING;
+          `, [userId, shuffledStores[i], rating]);
+        }
+      }
+    }
 
     return NextResponse.json({
       message: 'Database initialized successfully!',

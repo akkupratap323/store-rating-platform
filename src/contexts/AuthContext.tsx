@@ -8,6 +8,7 @@ interface User {
   email: string;
   address: string;
   role: 'admin' | 'user' | 'store_owner';
+  created_at?: string;
 }
 
 interface AuthContextType {

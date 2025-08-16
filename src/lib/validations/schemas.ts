@@ -9,7 +9,7 @@ const passwordSchema = z
 
 const nameSchema = z
   .string()
-  .min(20, 'Name must be at least 20 characters')
+  .min(3, 'Name must be at least 3 characters')
   .max(60, 'Name must be at most 60 characters');
 
 const addressSchema = z
@@ -26,6 +26,7 @@ export const userRegistrationSchema = z.object({
   email: emailSchema,
   password: passwordSchema,
   address: addressSchema,
+  role: z.enum(['user', 'store_owner']).default('user'),
 });
 
 export const userLoginSchema = z.object({
@@ -57,3 +58,14 @@ export const adminUserCreationSchema = z.object({
   address: addressSchema,
   role: z.enum(['admin', 'user', 'store_owner']),
 });
+
+export const adminUserUpdateSchema = z.object({
+  name: nameSchema.optional(),
+  email: emailSchema.optional(),
+  password: passwordSchema.optional(),
+  address: addressSchema.optional(),
+  role: z.enum(['admin', 'user', 'store_owner']).optional(),
+}).refine(
+  (data) => Object.values(data).some(value => value !== undefined),
+  { message: 'At least one field must be provided for update' }
+);

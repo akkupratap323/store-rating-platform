@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/common/DashboardLayout';
-import { UserManagement } from '@/components/admin/UserManagement';
+import { EnhancedUserManagement } from '@/components/admin/EnhancedUserManagement';
 
 export default function AdminUsersPage() {
   return (
     <DashboardLayout allowedRoles={['admin']}>
-      <UserManagement />
+      <EnhancedUserManagement />
     </DashboardLayout>
   );
 }

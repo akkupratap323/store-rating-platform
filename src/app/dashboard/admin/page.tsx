@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/common/DashboardLayout';
-import { AdminDashboard } from '@/components/admin/AdminDashboard';
+import { EnhancedAdminDashboard } from '@/components/admin/EnhancedAdminDashboard';
 
 export default function AdminDashboardPage() {
   return (
     <DashboardLayout allowedRoles={['admin']}>
-      <AdminDashboard />
+      <EnhancedAdminDashboard />
     </DashboardLayout>
   );
 }

@@ -1,10 +1,10 @@
 import { DashboardLayout } from '@/components/common/DashboardLayout';
-import { StoreManagement } from '@/components/admin/StoreManagement';
+import { EnhancedStoreManagement } from '@/components/admin/EnhancedStoreManagement';
 
 export default function AdminStoresPage() {
   return (
     <DashboardLayout allowedRoles={['admin']}>
-      <StoreManagement />
+      <EnhancedStoreManagement />
     </DashboardLayout>
   );
 }

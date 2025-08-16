@@ -24,3 +24,141 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Fix z-index layering issues globally */
+/* Ensure all form elements have proper z-index */
+.form-element-fix {
+  position: relative;
+  z-index: 110;
+  pointer-events: auto;
+}
+
+/* Ensure all input elements work properly */
+input, textarea, select {
+  position: relative;
+  z-index: 110 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure select dropdowns appear above everything */
+[data-radix-popper-content-wrapper] {
+  z-index: 130 !important;
+}
+
+/* Ensure buttons are interactive */
+button {
+  position: relative;
+  z-index: 200 !important;
+  pointer-events: auto !important;
+}
+
+/* Modal and dialog z-index fixes */
+[data-state="open"][data-side] {
+  z-index: 1000 !important;
+}
+
+/* Overlay fixes */
+[data-radix-dialog-overlay] {
+  z-index: 1000 !important;
+}
+
+[data-radix-dialog-content] {
+  z-index: 1010 !important;
+}
+
+/* Toast container fix */
+[data-react-hot-toast] {
+  z-index: 2000 !important;
+}
+
+/* Navigation fix */
+nav {
+  z-index: 50 !important;
+}
+
+/* Table interactive elements */
+table button {
+  z-index: 200 !important;
+}
+
+/* Card interactive elements */
+.card input,
+.card button,
+.card select {
+  z-index: 110 !important;
+  pointer-events: auto !important;
+}
+
+/* Form in modal fixes */
+.modal-form input,
+.modal-form button,
+.modal-form select,
+.modal-form textarea {
+  z-index: 1020 !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure all interactive elements in forms work */
+form * {
+  pointer-events: auto !important;
+}
+
+/* Login form specific fixes */
+.login-form {
+  z-index: 2000 !important;
+  position: relative !important;
+}
+
+.login-form input,
+.login-form button {
+  z-index: 2300 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+}
+
+/* Store owner dashboard button fixes */
+.store-owner-dashboard a,
+.store-owner-dashboard button {
+  z-index: 800 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure background elements don't interfere with interactive elements */
+.meteors,
+.sparkles {
+  pointer-events: none !important;
+}
+
+/* Background gradient fixes */
+.background-gradient {
+  pointer-events: none !important;
+}
+
+.background-gradient > * {
+  pointer-events: auto !important;
+}
+
+/* Animation improvements */
+.animate-meteor {
+  animation: meteor 5s linear infinite;
+}
+
+@keyframes meteor {
+  0% {
+    transform: rotate(215deg) translateX(0);
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(215deg) translateX(-500px);
+    opacity: 0;
+  }
+}
+
+.gradient-mask {
+  mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+}

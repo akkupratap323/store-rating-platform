@@ -80,7 +80,7 @@ export function LoginForm() {
             <div className="text-center text-sm">
               <span className="text-gray-600">Don't have an account? </span>
               <Link href="/auth/register" className="text-blue-600 hover:underline">
-                Sign up
+                Sign up as a user
               </Link>
             </div>
           </form>

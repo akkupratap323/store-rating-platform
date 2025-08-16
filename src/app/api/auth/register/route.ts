@@ -7,8 +7,18 @@ import { userRegistrationSchema } from '@/lib/validations/schemas';
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const validatedData = userRegistrationSchema.parse(body);
-    const { name, email, password, address } = validatedData;
+    
+    // Only allow normal user registration - force role to 'user'
+    const userData = {
+      name: body.name,
+      email: body.email,
+      password: body.password,
+      address: body.address,
+      role: 'user' // Always set to 'user' for public registration
+    };
+
+    const validatedData = userRegistrationSchema.parse(userData);
+    const { name, email, password, address, role } = validatedData;
 
     const existingUser = await pool.query('SELECT id FROM users WHERE email = $1', [email]);
     if (existingUser.rows.length > 0) {
@@ -22,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     const result = await pool.query(
       'INSERT INTO users (name, email, password, address, role) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, email, address, role',
-      [name, email, hashedPassword, address, 'user']
+      [name, email, hashedPassword, address, role]
     );
 
     const user = result.rows[0];
