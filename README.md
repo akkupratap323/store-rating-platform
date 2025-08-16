@@ -2,11 +2,18 @@
 
 > **A modern, full-stack web application for store ratings and management with role-based dashboards**
 
+## 🌐 Live Demo
+
+**🚀 [View Live Application](https://store-rating-platform-three.vercel.app/)**
+
+Experience the full Store Rating Platform with all features and role-based dashboards deployed on Vercel.
+
 [![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue?style=for-the-badge&logo=postgresql)](https://postgresql.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://store-rating-platform-three.vercel.app/)
 
 ## 🌟 Overview
 
