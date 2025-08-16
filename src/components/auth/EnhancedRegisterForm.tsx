@@ -81,10 +81,10 @@ export function EnhancedRegisterForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-6 relative overflow-hidden">
       {/* Background Effects */}
-      <Meteors number={25} />
+      <div className="meteors"><Meteors number={25} /></div>
       
       {/* Floating Sparkles */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden sparkles">
         {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
@@ -111,9 +111,9 @@ export function EnhancedRegisterForm() {
       </div>
 
       {/* Main Registration Card */}
-      <div className={`w-full max-w-lg relative ${Z_CLASSES.content}`}>
+      <div className={`w-full max-w-lg relative ${Z_CLASSES.content} z-[2000]`} style={{zIndex: 2000}}>
         <BackgroundGradient className="rounded-[22px] p-1">
-          <AnimatedCard className="bg-black/80 backdrop-blur-xl border-white/10">
+          <AnimatedCard className="bg-black/80 backdrop-blur-xl border-white/10 relative z-[2100]">
             <CardHeader className="text-center space-y-4">
               <motion.div
                 initial={{ scale: 0 }}
@@ -153,7 +153,7 @@ export function EnhancedRegisterForm() {
                     <p className="text-blue-400 font-medium">Regular User Account</p>
                   </div>
                   <p className="text-gray-300 text-sm">
-                    You'll be able to browse stores, submit ratings, and manage your reviews.
+                    You&apos;ll be able to browse stores, submit ratings, and manage your reviews.
                   </p>
                 </div>
               </motion.div>
@@ -163,7 +163,8 @@ export function EnhancedRegisterForm() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
                 onSubmit={handleSubmit}
-                className="space-y-6"
+                className="space-y-6 signup-form relative z-[2200]"
+                style={{zIndex: 2200}}
               >
                 {error && (
                   <motion.div
@@ -188,11 +189,12 @@ export function EnhancedRegisterForm() {
                       onChange={handleChange}
                       required
                       placeholder="Enter your full name"
-                      minLength={20}
+                      minLength={3}
                       maxLength={60}
-                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 ${
+                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 relative z-[2300] ${
                         fieldErrors.name ? 'border-red-400' : ''
                       }`}
+                      style={{zIndex: 2300, position: 'relative'}}
                     />
                   </div>
                   {fieldErrors.name ? (
@@ -202,7 +204,7 @@ export function EnhancedRegisterForm() {
                     </p>
                   ) : (
                     <p className="text-xs text-gray-400">
-                      Must be between 20-60 characters ({formData.name.length}/60)
+                      Must be between 3-60 characters ({formData.name.length}/60)
                     </p>
                   )}
                 </div>
@@ -219,9 +221,10 @@ export function EnhancedRegisterForm() {
                       onChange={handleChange}
                       required
                       placeholder="Enter your email address"
-                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 ${
+                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 relative z-[2300] ${
                         fieldErrors.email ? 'border-red-400' : ''
                       }`}
+                      style={{zIndex: 2300, position: 'relative'}}
                     />
                   </div>
                   {fieldErrors.email && (
@@ -246,9 +249,10 @@ export function EnhancedRegisterForm() {
                       placeholder="Create a strong password"
                       minLength={8}
                       maxLength={16}
-                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 ${
+                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 relative z-[2300] ${
                         fieldErrors.password ? 'border-red-400' : ''
                       }`}
+                      style={{zIndex: 2300, position: 'relative'}}
                     />
                   </div>
                   {fieldErrors.password ? (
@@ -284,9 +288,10 @@ export function EnhancedRegisterForm() {
                       required
                       placeholder="Enter your full address"
                       maxLength={400}
-                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 ${
+                      className={`pl-10 bg-white/10 border-white/20 text-white placeholder-gray-400 focus:border-green-400 focus:ring-green-400/20 relative z-[2300] ${
                         fieldErrors.address ? 'border-red-400' : ''
                       }`}
+                      style={{zIndex: 2300, position: 'relative'}}
                     />
                   </div>
                   {fieldErrors.address ? (
@@ -303,7 +308,8 @@ export function EnhancedRegisterForm() {
                 
                 <Button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 border-none text-white font-semibold py-3 text-lg" 
+                  className="w-full bg-gradient-to-r from-green-500 to-blue-600 hover:from-green-600 hover:to-blue-700 border-none text-white font-semibold py-3 text-lg relative z-[2400]" 
+                  style={{zIndex: 2400, position: 'relative'}}
                   disabled={loading}
                 >
                   {loading ? (

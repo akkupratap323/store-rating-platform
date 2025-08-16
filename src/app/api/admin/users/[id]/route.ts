@@ -3,10 +3,11 @@ import { pool } from '@/lib/database/connection';
 import { verifyToken } from '@/lib/auth/jwt';
 import { adminUserUpdateSchema } from '@/lib/validations/schemas';
 import { hashPassword } from '@/lib/auth/password';
+import { isZodError } from '@/types/api';
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const authHeader = request.headers.get('authorization');
@@ -21,7 +22,8 @@ export async function PUT(
       return NextResponse.json({ message: 'Admin access required' }, { status: 403 });
     }
 
-    const userId = parseInt(params.id);
+    const resolvedParams = await params;
+    const userId = parseInt(resolvedParams.id);
     if (isNaN(userId)) {
       return NextResponse.json({ message: 'Invalid user ID' }, { status: 400 });
     }
@@ -92,8 +94,8 @@ export async function PUT(
       message: 'User updated successfully',
       user: result.rows[0]
     });
-  } catch (error: any) {
-    if (error.name === 'ZodError') {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ message: 'Validation error', errors: error.errors }, { status: 400 });
     }
     console.error('Update user error:', error);
@@ -103,7 +105,7 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const authHeader = request.headers.get('authorization');
@@ -118,7 +120,8 @@ export async function DELETE(
       return NextResponse.json({ message: 'Admin access required' }, { status: 403 });
     }
 
-    const userId = parseInt(params.id);
+    const resolvedParams = await params;
+    const userId = parseInt(resolvedParams.id);
     if (isNaN(userId)) {
       return NextResponse.json({ message: 'Invalid user ID' }, { status: 400 });
     }

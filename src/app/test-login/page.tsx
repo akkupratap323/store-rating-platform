@@ -83,7 +83,7 @@ export default function TestLoginPage() {
           
           <Button 
             type="button" 
-            onClick={handleSubmit as any}
+            onClick={(e) => handleSubmit(e as React.FormEvent)}
             className="w-full mt-2" 
             variant="outline"
             disabled={loading}

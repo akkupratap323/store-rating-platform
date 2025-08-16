@@ -42,7 +42,7 @@ export function UserDashboard() {
             totalRatings: ratings.length,
             storesRated: ratings.length, // Each rating is for a unique store due to DB constraint
             averageRating: ratings.length > 0 
-              ? (ratings.reduce((sum: number, r: any) => sum + r.rating, 0) / ratings.length).toFixed(1)
+              ? (ratings.reduce((sum: number, r: {rating: number}) => sum + r.rating, 0) / ratings.length).toFixed(1)
               : '0.0',
             recentRatings: ratings.slice(0, 5) // Get 5 most recent
           };

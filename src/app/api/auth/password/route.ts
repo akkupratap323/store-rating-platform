@@ -3,6 +3,7 @@ import { pool } from '@/lib/database/connection';
 import { comparePassword, hashPassword } from '@/lib/auth/password';
 import { verifyToken } from '@/lib/auth/jwt';
 import { passwordUpdateSchema } from '@/lib/validations/schemas';
+import { isZodError } from '@/types/api';
 
 export async function PUT(request: NextRequest) {
   try {
@@ -55,8 +56,8 @@ export async function PUT(request: NextRequest) {
     await pool.query('UPDATE users SET password = $1 WHERE id = $2', [hashedNewPassword, user.id]);
 
     return NextResponse.json({ message: 'Password updated successfully' });
-  } catch (error: any) {
-    if (error.name === 'ZodError') {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json(
         { message: 'Validation error', errors: error.errors },
         { status: 400 }

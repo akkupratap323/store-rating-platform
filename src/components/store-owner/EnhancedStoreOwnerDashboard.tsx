@@ -315,7 +315,7 @@ export function EnhancedStoreOwnerDashboard() {
               <CardDescription className="text-gray-400">Manage your store presence</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4 relative z-[500]" style={{zIndex: 500}}>
-              <BackgroundGradient className="rounded-[16px] p-1 relative z-[600]" style={{zIndex: 600}}>
+              <BackgroundGradient className="rounded-[16px] p-1 relative z-[600]">
                 <Link href="/dashboard/store-owner/stores" className="block relative z-[700]" style={{zIndex: 700}}>
                   <Button className="w-full justify-between bg-black border-none text-white py-6 relative z-[800] pointer-events-auto" style={{zIndex: 800, position: 'relative'}}>
                     <span className="flex items-center">

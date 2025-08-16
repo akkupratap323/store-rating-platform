@@ -103,7 +103,7 @@ export function UserRatings() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{ratings.length}</div>
-            <p className="text-xs text-muted-foreground">Stores you've rated</p>
+            <p className="text-xs text-muted-foreground">Stores you&apos;ve rated</p>
           </CardContent>
         </Card>
 
@@ -151,12 +151,12 @@ export function UserRatings() {
       <Card>
         <CardHeader>
           <CardTitle>Your Store Ratings</CardTitle>
-          <CardDescription>All the stores you've rated and reviewed</CardDescription>
+          <CardDescription>All the stores you&apos;ve rated and reviewed</CardDescription>
         </CardHeader>
         <CardContent>
           {ratings.length === 0 ? (
             <div className="text-center py-8">
-              <p className="text-gray-500 mb-4">You haven't rated any stores yet.</p>
+              <p className="text-gray-500 mb-4">You haven&apos;t rated any stores yet.</p>
               <Button asChild>
                 <a href="/dashboard/user/stores">Browse Stores to Rate</a>
               </Button>

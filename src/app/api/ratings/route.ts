@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { pool } from '@/lib/database/connection';
 import { verifyToken } from '@/lib/auth/jwt';
 import { ratingSchema } from '@/lib/validations/schemas';
+import { isZodError } from '@/types/api';
 
 export async function POST(request: NextRequest) {
   try {
@@ -48,8 +49,8 @@ export async function POST(request: NextRequest) {
       message: existingRating.rows.length > 0 ? 'Rating updated successfully' : 'Rating submitted successfully',
       rating: result.rows[0]
     });
-  } catch (error: any) {
-    if (error.name === 'ZodError') {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ message: 'Validation error', errors: error.errors }, { status: 400 });
     }
     console.error('Rating error:', error);

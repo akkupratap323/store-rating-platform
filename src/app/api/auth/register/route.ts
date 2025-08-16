@@ -3,6 +3,7 @@ import { pool } from '@/lib/database/connection';
 import { hashPassword } from '@/lib/auth/password';
 import { generateToken } from '@/lib/auth/jwt';
 import { userRegistrationSchema } from '@/lib/validations/schemas';
+import { isZodError } from '@/types/api';
 
 export async function POST(request: NextRequest) {
   try {
@@ -43,8 +44,8 @@ export async function POST(request: NextRequest) {
       user: { id: user.id, name: user.name, email: user.email, address: user.address, role: user.role },
       token
     }, { status: 201 });
-  } catch (error: any) {
-    if (error.name === 'ZodError') {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json(
         { message: 'Validation error', errors: error.errors },
         { status: 400 }

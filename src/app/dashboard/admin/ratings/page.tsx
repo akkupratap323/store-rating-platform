@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 import { Star, Users, Award, Calendar, TrendingUp, BarChart, Eye } from 'lucide-react';
 import { AnimatedCard } from '@/components/ui/animated-card';
@@ -19,8 +19,8 @@ import {
   PieChart,
   Pie,
   Cell,
-  BarChart as RechartsBarChart,
-  Bar
+  // BarChart as RechartsBarChart,
+  // Bar
 } from 'recharts';
 
 interface Rating {
@@ -32,7 +32,7 @@ interface Rating {
   created_at: string;
 }
 
-const COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6'];
+// const COLORS = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6'];
 
 export default function EnhancedAdminRatingsPage() {
   const [ratings, setRatings] = useState<Rating[]>([]);
@@ -314,7 +314,7 @@ export default function EnhancedAdminRatingsPage() {
                   <Star className="h-20 w-20 text-gray-500" />
                   <div>
                     <h3 className="text-2xl font-semibold text-white mb-3">No ratings yet</h3>
-                    <p className="text-gray-400 text-lg">Users haven't started rating stores yet</p>
+                    <p className="text-gray-400 text-lg">Users haven&apos;t started rating stores yet</p>
                   </div>
                 </div>
               </div>

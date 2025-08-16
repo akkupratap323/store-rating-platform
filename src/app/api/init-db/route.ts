@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { pool } from '@/lib/database/connection';
 import { hashPassword } from '@/lib/auth/password';
 
-export async function POST(request: NextRequest) {
+export async function POST() {
   try {
     console.log('Initializing database...');
 

@@ -86,7 +86,7 @@ export function EnhancedLoginForm() {
       {/* Main Login Card */}
       <div className={`w-full max-w-md relative ${Z_CLASSES.modalContent} z-[2000]`} style={{zIndex: 2000}}>
         <BackgroundGradient className="rounded-[22px] p-1">
-          <AnimatedCard className="bg-black/80 backdrop-blur-xl border-white/10 relative z-[2100]" style={{zIndex: 2100}}>
+          <AnimatedCard className="bg-black/80 backdrop-blur-xl border-white/10 relative z-[2100]">
             <CardHeader className="text-center space-y-4">
               <motion.div
                 initial={{ scale: 0 }}
@@ -185,7 +185,7 @@ export function EnhancedLoginForm() {
                 </Button>
                 
                 <div className="text-center text-sm">
-                  <span className="text-gray-400">Don't have an account? </span>
+                  <span className="text-gray-400">Don&apos;t have an account? </span>
                   <Link 
                     href="/auth/register" 
                     className="text-blue-400 hover:text-blue-300 font-medium hover:underline transition-colors inline-flex items-center"

@@ -194,7 +194,7 @@ export function EnhancedUserManagement() {
       setEditLoading(true);
       setError(null);
       
-      const updateData: any = {
+      const updateData: {name: string; email: string; address: string; role: string; password?: string} = {
         name: editingUser.name,
         email: editingUser.email,
         address: editingUser.address,

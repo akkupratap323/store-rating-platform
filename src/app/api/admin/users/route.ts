@@ -3,6 +3,7 @@ import { pool } from '@/lib/database/connection';
 import { verifyToken } from '@/lib/auth/jwt';
 import { adminUserCreationSchema } from '@/lib/validations/schemas';
 import { hashPassword } from '@/lib/auth/password';
+import { isZodError } from '@/types/api';
 
 export async function GET(request: NextRequest) {
   try {
@@ -31,7 +32,7 @@ export async function GET(request: NextRequest) {
       WHERE 1=1
     `;
     
-    const queryParams: any[] = [];
+    const queryParams: string[] = [];
     let paramCount = 0;
 
     if (search && field) {
@@ -100,8 +101,8 @@ export async function POST(request: NextRequest) {
       message: 'User created successfully',
       user: result.rows[0]
     });
-  } catch (error: any) {
-    if (error.name === 'ZodError') {
+  } catch (error: unknown) {
+    if (isZodError(error)) {
       return NextResponse.json({ message: 'Validation error', errors: error.errors }, { status: 400 });
     }
     console.error('Create user error:', error);

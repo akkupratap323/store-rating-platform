@@ -2,11 +2,11 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { enhancedToast } from '@/components/ui/enhanced-toast';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { Z_CLASSES } from '@/lib/z-index';
+// import { Z_CLASSES } from '@/lib/z-index';
 import { AnimatedCard } from '@/components/ui/animated-card';
 import { BackgroundGradient } from '@/components/ui/background-gradient';
 import { Meteors } from '@/components/ui/meteors';
@@ -18,8 +18,8 @@ import {
   Shield, 
   User,
   ArrowRight,
-  TrendingUp,
-  Award,
+  // TrendingUp,
+  // Award,
   Activity
 } from 'lucide-react';
 import { motion } from 'framer-motion';

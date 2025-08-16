@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
       LEFT JOIN ratings ur ON s.id = ur.store_id AND ur.user_id = $1
     `;
 
-    const queryParams: any[] = [user.id];
+    const queryParams: (string | number)[] = [user.id];
     let paramCount = 1;
 
     if (query && field) {

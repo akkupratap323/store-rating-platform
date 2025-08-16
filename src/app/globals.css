@@ -116,6 +116,19 @@ form * {
   pointer-events: auto !important;
 }
 
+/* Signup form specific fixes */
+.signup-form {
+  z-index: 2200 !important;
+  position: relative !important;
+}
+
+.signup-form input,
+.signup-form button {
+  z-index: 2300 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+}
+
 /* Store owner dashboard button fixes */
 .store-owner-dashboard a,
 .store-owner-dashboard button {

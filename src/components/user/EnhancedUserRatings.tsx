@@ -184,7 +184,7 @@ export function EnhancedUserRatings() {
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-white mb-2">{formatNumber(ratings.length)}</div>
-              <p className="text-sm text-gray-300">Stores you've rated</p>
+              <p className="text-sm text-gray-300">Stores you&apos;ve rated</p>
               <div className="mt-3 flex items-center">
                 <Activity className="h-4 w-4 text-blue-400 mr-1" />
                 <span className="text-xs text-blue-400">Your impact!</span>
@@ -244,14 +244,14 @@ export function EnhancedUserRatings() {
                     acc[r.rating] = (acc[r.rating] || 0) + 1;
                     return acc;
                   }, {} as Record<number, number>)[
-                    Object.entries(ratings.reduce((acc, r) => {
+                    Number(Object.entries(ratings.reduce((acc, r) => {
                       acc[r.rating] = (acc[r.rating] || 0) + 1;
                       return acc;
-                    }, {} as Record<number, number>)).sort(([,a], [,b]) => b - a)[0]?.[0] as any
-                  ] ? Object.entries(ratings.reduce((acc, r) => {
+                    }, {} as Record<number, number>)).sort(([,a], [,b]) => b - a)[0]?.[0]) || 5
+                  ] ? Number(Object.entries(ratings.reduce((acc, r) => {
                     acc[r.rating] = (acc[r.rating] || 0) + 1;
                     return acc;
-                  }, {} as Record<number, number>)).sort(([,a], [,b]) => b - a)[0]?.[0] : '5'
+                  }, {} as Record<number, number>)).sort(([,a], [,b]) => b - a)[0]?.[0]) : 5
                   : '5'
                 }⭐
               </div>
@@ -354,7 +354,7 @@ export function EnhancedUserRatings() {
         <AnimatedCard delay={0.7} className="bg-black/40 border-white/10">
           <CardHeader>
             <CardTitle className="text-white">Your Store Ratings</CardTitle>
-            <CardDescription className="text-gray-400">All the stores you've rated and reviewed</CardDescription>
+            <CardDescription className="text-gray-400">All the stores you&apos;ve rated and reviewed</CardDescription>
           </CardHeader>
           <CardContent>
             {ratings.length === 0 ? (

@@ -73,7 +73,7 @@ export function RegisterForm() {
                   <strong>Account Type:</strong> Regular User
                 </p>
                 <p className="text-xs text-blue-600 mt-1">
-                  You'll be able to browse and rate stores. For store owner or admin access, contact an administrator.
+                  You&apos;ll be able to browse and rate stores. For store owner or admin access, contact an administrator.
                 </p>
               </div>
             </div>
